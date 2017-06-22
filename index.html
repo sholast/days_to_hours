@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<input type="text" id="report" style="margin:20px;">from report
+<br>
+<div style="margin:20px;">
+<input type="number" min="0" max="5" id="w" value="0">w
+<input type="number" min="0" max="6" id="d" value="0">d
+<input type="number" min="0" max="23" id="h" value="0">h
+<input type="number" min="0" max="59" id="m" value="0">m
+</div>
+<br>
+<input type="text" id="result" style="margin:20px;">hours
+</body>
+<script>
+    var wInput = document.getElementById('w');
+    var dInput = document.getElementById('d');
+    var hInput = document.getElementById('h');
+    var mInput = document.getElementById('m');
+    var result = document.getElementById('result');
+    var report = document.getElementById('report');
+
+    wInput.addEventListener('change', convert, false);
+    dInput.addEventListener('change', convert, false);
+    hInput.addEventListener('change', convert, false);
+    mInput.addEventListener('change', convert, false);
+    report.addEventListener('change', split, false);
+
+    function split() {
+        var splitted = report.value.trim().split(' ');
+        var mValue = splitted[splitted.length -1 ];
+        var hValue = splitted[splitted.length -2 ];
+        var dValue = splitted[splitted.length -3 ];
+        var wValue = splitted[splitted.length -4 ];
+
+        mInput.value = mValue ? mValue.slice(0, -1) : 0;
+        hInput.value = hValue ? hValue.slice(0, -1) : 0;
+        dInput.value = dValue ? dValue.slice(0, -1) : 0;
+        wInput.value = wValue ? wValue.slice(0, -1) : 0;
+        convert();
+    }
+
+    function convert() {
+        result.value = (wInput.value * 40) + (dInput.value * 8) + (hInput.value * 1) + (mInput.value / 60);
+        console.log(result.value);
+    }
+</script>
+</html>
